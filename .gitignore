@@ -26,3 +26,6 @@ rt_base
 
 .history
 .env*.local
+
+# Local Netlify folder
+.netlify

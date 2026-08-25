@@ -1,0 +1,17 @@
+# Netlify deployment (Git-based)
+# Build runs on Netlify's Linux build image — native modules (better-sqlite3, sharp)
+# resolve against Linux there, avoiding Windows->Lambda binary issues.
+[build]
+  command = "pnpm build"
+  publish = ".output/public"
+
+[build.environment]
+  NODE_VERSION = "24"
+  # netlify deploy --build does NOT set NETLIFY=true; force the Nitro preset explicitly
+  NITRO_PRESET = "netlify"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"

@@ -27,7 +27,7 @@ export default defineNuxtConfig({
   css: ['~/assets/style/main.css'],
 
   site: {
-    url: 'https://example.com',
+    url: 'https://portfolio-logholizon.netlify.app',
     defaultLocale: 'en',
     indexable: true,
   },
@@ -131,7 +131,7 @@ export default defineNuxtConfig({
 
     repository: {
       provider: 'github',
-      owner: 'YOUR_GITHUB_USERNAME',
+      owner: 'dinsorkot-sk',
       repo: 'portfolio',
       branch: 'main',
     },
