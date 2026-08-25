@@ -1,5 +1,6 @@
 <script setup lang="ts">
-const meetingLink = useAppConfig().global.meetingLink
+const { global, socials } = useAppConfig()
+const fastworkLink = socials.fastwork || global.meetingLink
 </script>
 
 <template>
@@ -7,11 +8,12 @@ const meetingLink = useAppConfig().global.meetingLink
     <SpotlightButton>
       <NuxtLink
         class="font-mona relative flex items-center justify-center gap-2 bg-gradient-to-b from-white/25 to-white bg-clip-text text-lg font-medium text-transparent transition-all duration-200"
-        :to="meetingLink"
+        :to="fastworkLink"
+        target="_blank"
       >
         {{ $t("global.meeting") }}
         <UIcon
-          name="heroicons:calendar-days"
+          name="heroicons:briefcase"
           class="size-5 text-white/80"
         />
       </NuxtLink>

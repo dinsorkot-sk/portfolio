@@ -17,14 +17,14 @@ if (!page.value)
   throw createError({ statusCode: 404, statusMessage: 'Page not found' })
 
 const { profile } = useAppConfig()
-
 const { copy } = useClipboard()
+const { socials } = useAppConfig()
 
 defineShortcuts({
   meta_o: {
     usingInput: true,
     handler: () => {
-      copy(profile.email!)
+      copy(socials.fastwork)
       toast.success(t('global.email_copied'))
     },
   },

@@ -12,8 +12,8 @@ const { profile } = useAppConfig()
           width="96"
           :src="profile.picture!"
           class="size-24 rounded-full border-2 border-neutral-800/30 object-cover"
-          alt="Hugo Richard Profile Picture"
-          aria-label="Hugo Richard Profile Picture"
+          :alt="profile.name + ' Profile Picture'"
+          :aria-label="profile.name + ' Profile Picture'"
         />
       </div>
     </SpotlightButton>

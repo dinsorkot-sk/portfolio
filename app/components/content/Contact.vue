@@ -1,51 +1,23 @@
 <script setup lang="ts">
-import * as z from 'zod'
-import type { FormSubmitEvent } from '#ui/types'
+const { socials } = useAppConfig()
 
-const { profile } = useAppConfig()
-const { t } = useI18n()
-
-const isResendEnabled = useRuntimeConfig().public.resend
-
-const state = ref({
-  email: '',
-  message: '',
-  phone: '',
-  fullname: '',
-  subject: '',
-})
-
-const schema = z.object({
-  email: z.string().email('Invalid email'),
-  message: z.string().min(10, 'Message is too short'),
-  subject: z.string().min(5, 'Subject is too short'),
-  fullname: z.string().min(3, 'Name is too short'),
-})
-type Schema = z.output<typeof schema>
-
-const loading = ref(false)
-
-async function onSubmit(event: FormSubmitEvent<Schema>) {
-  loading.value = true
-  try {
-    await $fetch('/api/emails/send', {
-      method: 'POST',
-      body: event.data,
-    })
-    state.value = {
-      email: '',
-      message: '',
-      phone: '',
-      fullname: '',
-      subject: '',
-    }
-    toast.success(t('contact.success'))
-  }
-  catch {
-    toast.error(t('contact.error'))
-  }
-  loading.value = false
-}
+const channels = [
+  {
+    name: 'Fastwork',
+    description: 'Hire me — view services & reviews',
+    descriptionKey: true,
+    icon: 'lucide:briefcase',
+    link: socials.fastwork,
+    primary: true,
+  },
+  {
+    name: 'GitHub',
+    description: 'Code, projects & open source',
+    icon: 'custom:github',
+    link: socials.github,
+    primary: false,
+  },
+]
 </script>
 
 <template>
@@ -63,129 +35,32 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       />
     </h2>
     <Divider class="mb-8 mt-2" />
-    <div class="flex flex-col sm:items-center sm:justify-between">
-      <UForm
-        :state
-        :schema
-        class="flex w-full max-w-[40rem] flex-col gap-3"
-        @submit="onSubmit"
+
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <SpotlightButton
+        v-for="channel in channels"
+        :key="channel.name"
       >
-        <UFormField
-          label="Fullname"
-          name="fullname"
-          required
+        <NuxtLink
+          :to="channel.link"
+          target="_blank"
+          class="flex flex-col items-center gap-3 rounded-xl border border-white/10 bg-zinc-900/60 px-6 py-10 text-center backdrop-blur-xl transition-all duration-300 hover:border-white/25"
+          :aria-label="'Go to ' + channel.name"
         >
-          <UInput
-            v-model="state.fullname"
-            type="text"
-            autocomplete="name"
-            class="w-full"
-            placeholder="John Doe"
+          <UIcon
+            :name="channel.icon"
+            class="size-10 text-white/80"
           />
-        </UFormField>
+          <span class="bg-gradient-to-b from-white/25 to-white bg-clip-text text-lg font-medium text-transparent">
+            {{ channel.name }}
+          </span>
+          <span class="text-sm text-muted">{{ channel.description }}</span>
+        </NuxtLink>
+      </SpotlightButton>
+    </div>
 
-        <UFormField
-          label="Email"
-          name="email"
-          required
-        >
-          <UInput
-            v-model="state.email"
-            autocomplete="email"
-            class="w-full"
-            placeholder="john.doe@gmail.com"
-          />
-        </UFormField>
-
-        <UFormField
-          label="Phone"
-          name="phone"
-        >
-          <UInput
-            v-model="state.phone"
-            autocomplete="tel"
-            class="w-full"
-            placeholder="123-456-7890"
-          />
-        </UFormField>
-
-        <UFormField
-          label="Subject"
-          name="subject"
-          required
-        >
-          <UInput
-            v-model="state.subject"
-            class="w-full"
-            :placeholder="$t('contact.subject')"
-          />
-        </UFormField>
-
-        <UFormField
-          label="Message"
-          name="message"
-          required
-        >
-          <UTextarea
-            v-model="state.message"
-            autoresize
-            class="w-full"
-            :rows="4"
-            placeholder="Lets work together!"
-          />
-        </UFormField>
-        <div class="flex justify-center">
-          <UTooltip
-            :disabled="isResendEnabled"
-            :text="$t('contact.disabled')"
-          >
-            <UButton
-              :loading
-              :disabled="!isResendEnabled"
-              type="submit"
-              block
-            >
-              {{ $t("contact.submit") }}
-            </UButton>
-          </UTooltip>
-        </div>
-      </UForm>
-      <Divider class="my-10" />
-      <div class="flex w-full flex-col items-center justify-between gap-4 sm:flex-row">
-        <div class="flex flex-col gap-3">
-          <dd class="flex items-center gap-3 text-neutral-400">
-            <UIcon
-              name="heroicons-phone"
-              class="size-6"
-              aria-hidden="true"
-            />
-            <span>
-              {{ profile.phone }}
-            </span>
-          </dd>
-          <dd class="flex items-center gap-3 text-neutral-400">
-            <UIcon
-              name="heroicons-envelope"
-              class="size-6"
-              aria-hidden="true"
-            />
-            <UTooltip
-              :text="$t('global.email')"
-              :shortcuts="['⌘', 'O']"
-            >
-              <NuxtLink
-                :to="`mailto:${profile.email}`"
-                class="cursor-pointer transition-colors duration-300"
-              >
-                {{ profile.email }}
-              </NuxtLink>
-            </UTooltip>
-          </dd>
-        </div>
-        <div>
-          <MeetingButton />
-        </div>
-      </div>
+    <div class="mt-10 flex justify-center">
+      <MeetingButton />
     </div>
   </section>
 </template>

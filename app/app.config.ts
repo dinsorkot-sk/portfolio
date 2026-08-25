@@ -1,25 +1,22 @@
 export default defineAppConfig({
   global: {
-    meetingLink: 'https://cal.com/your-link',
+    meetingLink: 'https://fastwork.co/user/dinsorkot',
     available: true,
   },
   profile: {
-    name: 'Your Name',
-    job: 'Developer & Designer',
+    name: 'Sirichai Kasemsuk',
+    job: 'Full-Stack Developer',
     email: 'you@example.com',
-    phone: '(+66) 0 000 000 0',
-    picture: 'https://ui-avatars.com/api/?name=Your+Name&background=282828&color=ededed&size=512',
+    phone: '',
+    picture: '/avatar.jpg',
   },
   socials: {
-    github: 'https://github.com/your-username',
-    twitter: 'https://twitter.com/your-username',
-    linkedin: 'https://www.linkedin.com/in/your-username',
-    instagram: 'https://www.instagram.com/your-username',
-    spotify: 'https://open.spotify.com/user/your-username',
+    github: 'https://github.com/dinsorkot-sk',
+    fastwork: 'https://fastwork.co/user/dinsorkot',
   },
   seo: {
-    title: 'Portfolio',
-    description: 'Portfolio of Your Name — developer and designer. Built with Nuxt.',
+    title: 'Sirichai Kasemsuk — Portfolio',
+    description: 'Full-stack developer portfolio: web apps, REST APIs and system migration. React, Vue, Next.js, Laravel, FastAPI. Available for hire on Fastwork.',
     url: 'https://example.com',
   },
   ui: {
