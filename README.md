@@ -1,75 +1,28 @@
-# Nuxt Minimal Starter
+# Portfolio
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Personal portfolio built from the [Canvas template](https://github.com/HugoRCD/canvas) by HugoRCD (Apache-2.0).
+
+- **Stack**: Nuxt 4 · Nuxt UI v4 · Nuxt Content · @nuxtjs/i18n · @nuxtjs/seo
+- **Locales**: English (`/en`) + Thai (`/th`) — content lives in `content/<locale>/`
+- **Editing**: all text is in `content/` (markdown pages, `projects/*.json`, `faq.json`) and `i18n/locales/<lang>/*.json`. Identity (name, job, email, socials, SEO) is in `app/app.config.ts`.
 
 ## Setup
 
-Make sure to install dependencies:
-
 ```bash
-# npm
-npm install
-
-# pnpm
 pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
 ```
 
-## Development Server
-
-Start the development server on `http://localhost:3000`:
+## Development
 
 ```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
+pnpm dev            # http://localhost:3000 → redirects to /en or /th
 ```
 
 ## Production
 
-Build the application for production:
-
 ```bash
-# npm
-npm run build
-
-# pnpm
 pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+pnpm start          # node .output/server/index.mjs
 ```
 
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Optional: set `NUXT_PRIVATE_RESEND_API_KEY` to enable the contact form email handler.

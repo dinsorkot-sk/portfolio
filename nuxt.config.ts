@@ -1,30 +1,139 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2025-05-15',
-  devtools: { enabled: true },
-
   modules: [
-    '@nuxt/icon',
-    '@nuxt/fonts',
-    '@nuxt/eslint',
-    '@nuxt/image',
+    '@vueuse/nuxt',
+    '@nuxt/ui',
+    '@nuxtjs/i18n',
+    '@nuxtjs/seo',
     '@nuxt/content',
-    '@nuxt/ui'
+    'nuxt-studio',
+    '@nuxt/image',
+    '@nuxt/scripts',
+    'vue-sonner/nuxt',
   ],
 
-  app: {
-    head: {
-      title: 'Nuxt', // default fallback title
-      htmlAttrs: {
-        lang: 'en',
+  imports: {
+    presets: [
+      {
+        from: 'vue-sonner',
+        imports: ['toast'],
       },
-      link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Prompt:wght@400;700&display=swap' }
-      ],
-      script: [
-        { src: 'https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4' }
-      ]
-    }
-  }
+    ],
+  },
+
+  devtools: {
+    enabled: true,
+  },
+
+  css: ['~/assets/style/main.css'],
+
+  site: {
+    url: 'https://example.com',
+    defaultLocale: 'en',
+    indexable: true,
+  },
+
+  colorMode: {
+    preference: 'dark',
+    fallback: 'dark',
+  },
+
+  content: {
+    preview: {
+      api: 'https://api.nuxt.studio',
+      dev: true,
+    },
+  },
+
+  mdc: {
+    highlight: {
+      theme: {
+        dark: 'github-dark',
+        default: 'github-dark',
+        light: 'github-light',
+      },
+    },
+  },
+
+  runtimeConfig: {
+    public: {
+      resend: !!process.env.NUXT_PRIVATE_RESEND_API_KEY,
+    },
+  },
+
+  routeRules: {
+    // Needed to activate preview on Nuxt Studio
+    '/': { prerender: false },
+  },
+
+  experimental: {
+    viewTransition: true,
+  },
+
+  compatibilityDate: '2025-01-05',
+
+  nitro: {
+    experimental: {
+      websocket: true,
+    },
+    prerender: {
+      autoSubfolderIndex: false,
+      crawlLinks: true,
+      routes: ['/en', '/th'],
+    },
+  },
+
+  hooks: {
+    'nitro:config': (config) => {
+      if (process.env.NUXT_PRIVATE_RESEND_API_KEY) {
+        config.handlers?.push({
+          method: 'post',
+          route: '/api/emails/send',
+          handler: '~~/server/emails/send.ts',
+        })
+      }
+    },
+  },
+
+  i18n: {
+    locales: [
+      { code: 'en', name: 'English', language: 'en-US' },
+      { code: 'th', name: 'ไทย', language: 'th-TH' },
+    ],
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root',
+    },
+    strategy: 'prefix',
+    defaultLocale: 'en',
+  },
+
+  icon: {
+    customCollections: [
+      {
+        prefix: 'custom',
+        dir: './app/assets/icons',
+      },
+    ],
+    clientBundle: {
+      scan: true,
+      includeCustomCollections: true,
+    },
+    provider: 'iconify',
+  },
+
+  ogImage: {
+    zeroRuntime: true,
+  },
+
+  studio: {
+    route: '/admin',
+
+    repository: {
+      provider: 'github',
+      owner: 'YOUR_GITHUB_USERNAME',
+      repo: 'portfolio',
+      branch: 'main',
+    },
+  },
 })

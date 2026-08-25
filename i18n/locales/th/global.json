@@ -1,0 +1,22 @@
+{
+  "app_description": "Canvas เป็น template portfolio ที่เรียบง่ายแต่สวยงาม สำหรับดีไซเนอร์และนักพัฒนา สร้างด้วย Nuxt และ Tailwind CSS",
+  "copied_to_clipboard": "คัดลอกไปยังคลิปบอร์ดแล้ว",
+  "article_link_copied": "คัดลอกลิงก์บทความไปยังคลิปบอร์ดแล้ว",
+  "email_copied": "คัดลอกอีเมลไปยังคลิปบอร์ดแล้ว",
+  "back_to_home": "กลับหน้าหลัก",
+  "switch_french": "สลับไปภาษาไทย",
+  "switch_english": "Switch to english",
+  "search": "ค้นหาคำสั่ง",
+  "command": "คำสั่งที่ใช้ได้",
+  "not_found": "ไม่พบคำสั่ง",
+  "see_more": "ดูเพิ่มเติม",
+  "soon": "เร็ว ๆ นี้",
+  "experiences": "ประสบการณ์",
+  "contact": "มาทำงานร่วมกัน",
+  "email": "คัดลอกอีเมล",
+  "cv": "ดาวน์โหลดเรซูเม่",
+  "meeting": "นัดหมายสัมภาษณ์",
+  "available": "พร้อมรับงานใหม่",
+  "unavailable": "กำลังมุ่งมั่นกับโปรเจกต์อื่นอยู่",
+  "all_rights_reserved": "สงวนลิขสิทธิ์"
+}
