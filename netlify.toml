@@ -1,14 +1,19 @@
 # Netlify deployment (Git-based)
 # Build runs on Netlify's Linux build image — native modules (better-sqlite3, sharp)
 # resolve against Linux there, avoiding Windows->Lambda binary issues.
+#
+# Nitro `netlify` preset layout (verified locally):
+#   - server function -> .netlify/functions-internal/  (auto-deployed by Netlify,
+#     declares path "/*" with preferStatic: true — static first, SSR fallback)
+#   - static assets   -> dist/                         (_nuxt/*, images, ...)
 [build]
-  command = "pnpm build && echo '/* /.netlify/functions/server 200' > .netlify/_redirects"
-
-# Force publish to .netlify — override any UI setting
-publish = ".netlify"
+  command = "pnpm build"
+  publish = "dist"
 
 [build.environment]
   NODE_VERSION = "24"
+  # Force the Nitro preset explicitly (netlify deploy --build does NOT set NETLIFY=true)
+  NITRO_PRESET = "netlify"
 
 [[headers]]
   for = "/*"
