@@ -2,7 +2,10 @@
 # Build runs on Netlify's Linux build image — native modules (better-sqlite3, sharp)
 # resolve against Linux there, avoiding Windows->Lambda binary issues.
 [build]
-  command = "pnpm build"
+  command = "pnpm build && echo '/* /.netlify/functions/server 200' > .netlify/_redirects"
+
+# Force publish to .netlify — override any UI setting
+publish = ".netlify"
 
 [build.environment]
   NODE_VERSION = "24"
