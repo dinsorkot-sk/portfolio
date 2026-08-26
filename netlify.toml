@@ -2,8 +2,8 @@
 # Build runs on Netlify's Linux build image — native modules (better-sqlite3, sharp)
 # resolve against Linux there, avoiding Windows->Lambda binary issues.
 [build]
-  command = "pnpm build && ls -la .output/public/ || echo 'MISSING: .output/public'"
-  publish = ".output/public"
+  command = "pnpm build"
+  publish = ".netlify"
 
 [build.environment]
   NODE_VERSION = "24"
