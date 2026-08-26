@@ -2,12 +2,11 @@
 # Build runs on Netlify's Linux build image — native modules (better-sqlite3, sharp)
 # resolve against Linux there, avoiding Windows->Lambda binary issues.
 [build]
-  command = "pnpm build"
-  publish = ".netlify"
+  command = "pnpm build && echo '=== .output ===' && find .output -maxdepth 2 -type d 2>/dev/null && echo '=== .netlify ===' && find .netlify -maxdepth 2 -type d 2>/dev/null && echo '=== .netlify files ===' && find .netlify -maxdepth 1 -type f 2>/dev/null"
+  publish = ".output/public"
 
 [build.environment]
   NODE_VERSION = "24"
-  # netlify deploy --build does NOT set NETLIFY=true; force the Nitro preset explicitly
   NITRO_PRESET = "netlify"
 
 [[headers]]
