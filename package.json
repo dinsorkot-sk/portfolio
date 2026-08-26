@@ -32,7 +32,8 @@
     "sitemap": "9.0.1",
     "nuxt-studio": "1.7.0",
     "ufo": "^1.6.4",
-    "vue-sonner": "2.0.9"
+    "vue-sonner": "2.0.9",
+    "zod": "3.25.76"
   },
   "devDependencies": {
     "@nuxt/eslint-config": "1.16.0",
